@@ -98,7 +98,7 @@ val BackgroundGray = Color(0xFFF8FAFC)
 
 @Composable
 fun PortalUmsidaApp() {
-    // State Penentu Layar & Penyimpan Nama
+    // State Penentu Layar & Penyimpan Namaaaaaaaa
     var currentScreen by rememberSaveable { mutableStateOf(Screen.REGISTRATION) }
     var loggedInName by rememberSaveable { mutableStateOf("") }
 
