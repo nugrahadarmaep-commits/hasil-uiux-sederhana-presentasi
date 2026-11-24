@@ -26,7 +26,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.CardTravel
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
@@ -92,7 +92,7 @@ class MainActivity : ComponentActivity() {
 enum class Screen { REGISTRATION, DASHBOARD, SETTINGS }
 
 // Warna Kustom Tema Modern Abu-Abu & Dark Slate
-val ModernDarkSlate = Color(0xFF1F2937)
+val ModernDarkSlate = Color(0xFF800000)
 val MaroonUmsida = ModernDarkSlate
 val BackgroundGray = Color(0xFFF8FAFC)
 
@@ -156,16 +156,16 @@ fun RegistrationScreen(onLoginSuccess: (String) -> Unit = {}) {
     // =========================================================================
     val errorNama = sudahSubmit && nama.trim().isEmpty()
     val errorEmail = sudahSubmit && !Patterns.EMAIL_ADDRESS.matcher(email.trim()).matches()
-    val errorNoHp = sudahSubmit && (noHp.trim().length < 10 || !noHp.all { it.isDigit() })
-    val errorPassword = sudahSubmit && password.length < 8
-    val errorKonfirmasi = sudahSubmit && konfirmasiPassword != password
+    //val errorNoHp = sudahSubmit && (noHp.trim().length < 10 || !noHp.all { it.isDigit() })
+    //val errorPassword = sudahSubmit && password.length < 8
+    //val errorKonfirmasi = sudahSubmit && konfirmasiPassword != password
     val errorPersetujuan = sudahSubmit && !setuju
 
     val formValid = nama.trim().isNotEmpty() &&
-            noHp.trim().length >= 10 &&
-            noHp.all { it.isDigit() } &&
-            Patterns.EMAIL_ADDRESS.matcher(email.trim()).matches() &&
-            password.length >= 8 && konfirmasiPassword == password && setuju
+            //noHp.trim().length >= 10 &&
+            //noHp.all { it.isDigit() } &&
+            Patterns.EMAIL_ADDRESS.matcher(email.trim()).matches()
+            //password.length >= 8 && konfirmasiPassword == password && setuju
 
     // [MODERN UI] Radius seragam untuk seluruh field dan tombol agar selaras
     val roundedFieldShape = RoundedCornerShape(14.dp)
@@ -213,7 +213,7 @@ fun RegistrationScreen(onLoginSuccess: (String) -> Unit = {}) {
                     modifier = Modifier.fillMaxWidth(),
                     shape = roundedFieldShape, // [MODERN UI] Sudut membulat modern
                     label = { Text("Nama Lengkap") }, // [Anatomi Field: Label]
-                    leadingIcon = { Icon(Icons.Filled.Person, contentDescription = null) }, // [Anatomi Field: Leading Icon]
+                    leadingIcon = { Icon(Icons.Filled.CardTravel, contentDescription = null) }, // [Anatomi Field: Leading Icon]
                     singleLine = true,
                     isError = errorNama, // [Anatomi Field & Validasi: Status Error]
                     supportingText = { if (errorNama) Text("Nama wajib diisi") } // [Anatomi Field & Validasi: Supporting Text]
@@ -249,8 +249,8 @@ fun RegistrationScreen(onLoginSuccess: (String) -> Unit = {}) {
                     leadingIcon = { Icon(Icons.Filled.Phone, contentDescription = null) }, // [MODERN UI] Ikon diperbaiki ke Phone
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
-                    isError = errorNoHp,
-                    supportingText = { if (errorNoHp) Text("Nomor HP minimal 10 digit angka") }
+                    //isError = errorNoHp,
+                    //supportingText = { if (errorNoHp) Text("Nomor HP minimal 10 digit angka") }
                 )
 
                 // Anatomi Field 4: Input Kata Sandi
@@ -276,8 +276,8 @@ fun RegistrationScreen(onLoginSuccess: (String) -> Unit = {}) {
                     },
                     visualTransformation = if (passwordTerlihat) VisualTransformation.None else PasswordVisualTransformation(),
                     singleLine = true,
-                    isError = errorPassword, // [Anatomi Field & Validasi: Status Error]
-                    supportingText = { if (errorPassword) Text("Kata sandi minimal 8 karakter") }
+                    //isError = errorPassword, // [Anatomi Field & Validasi: Status Error]
+                    //supportingText = { if (errorPassword) Text("Kata sandi minimal 8 karakter") }
                 )
 
                 // Anatomi Field 5: Input Konfirmasi Kata Sandi
@@ -293,8 +293,8 @@ fun RegistrationScreen(onLoginSuccess: (String) -> Unit = {}) {
                     leadingIcon = { Icon(Icons.Filled.Lock, contentDescription = null) }, // [Anatomi Field: Leading Icon]
                     visualTransformation = PasswordVisualTransformation(),
                     singleLine = true,
-                    isError = errorKonfirmasi, // [Anatomi Field & Validasi: Status Error]
-                    supportingText = { if (errorKonfirmasi) Text("Konfirmasi harus sama dengan kata sandi") }
+                    //isError = errorKonfirmasi, // [Anatomi Field & Validasi: Status Error]
+                    //supportingText = { if (errorKonfirmasi) Text("Konfirmasi harus sama dengan kata sandi") }
                 )
 
                 // Checkbox Persetujuan Ketentuan (Event & Validasi)
@@ -346,7 +346,7 @@ fun RegistrationScreen(onLoginSuccess: (String) -> Unit = {}) {
                         horizontalArrangement = Arrangement.spacedBy(10.dp),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(Color(0xFFECFDF5), RoundedCornerShape(12.dp)) // [MODERN UI] Container notifikasi hijau
+                            .background(Color(0xFFECFDF5), RoundedCornerShape(12.dp))
                             .padding(12.dp)
                     ) {
                         Icon(Icons.Filled.CheckCircle, contentDescription = null, tint = Color(0xFF059669))
@@ -431,7 +431,7 @@ fun DashboardScreen(
                         // [EVENT]: Aksi klik tombol membalik nilai boolean State
                         onClick = { showSchedule = !showSchedule },
                         modifier = Modifier.fillMaxWidth(),
-                        colors = ButtonDefaults.buttonColors(containerColor = ModernDarkSlate)
+                        colors = ButtonDefaults.buttonColors(containerColor = MaroonUmsida)
                     ) {
                         Text(if (showSchedule) "Sembunyikan Jadwal" else "Lihat Jadwal Kuliah")
                     }
